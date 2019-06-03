@@ -25,7 +25,9 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": [],
+            "scripts": [
+              "src/assets/js/d3.v4.min.js"
+            ],
             "es5BrowserSupport": true
           },
           "configurations": {
