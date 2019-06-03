@@ -55,9 +55,10 @@ export class Line {
             .range(['blue', 'red']);
        // console.log(this.value);
         // console.log(scalec(-0.00328), scalec(0.00328));
-        d3.csv('../assets/data/adj_array_avg.csv', data => {
-                data =  this.filterData(data);
-                const datah = findhundred(data);
+        d3.csv('../assets/data/final_edge_info_avg_undirect.csv', data => {
+            const number2show = 30;
+               data =  this.filterData(data);
+               const datah = findhundred(data, number2show);
                 const opcaticyScale1 =  d3.scaleLinear()
                             .domain([d3.min(selectdata(datah, 0)), d3.max(selectdata(datah, 0))])
                             .range([0.1, 1]);
@@ -178,17 +179,20 @@ export class Line {
             return linedata;
            // console.log(line, data);
         }
-        function findhundred(data) {
+        function findhundred(data, number2show) {
             let result = [];
+            
+            console.log(data);
             data.forEach(ele => {
                 result = result.concat(ele);
             });
-            // console.log(result);
-            const result1 = result.sort().reverse().splice(0, 100);
-          //  const result2 = result.sort().reverse().splice(1351, 205);
-            console.log(result1);
-          //   return result1.concat(result2);
-            return result1;
+            result.sort((a, b) => {
+                return a - b;
+            });
+            const result2 = result.splice(result.length - 1 - number2show, number2show);
+            const result1 = result.splice(0, number2show);
+            return result1.concat(result2);
+            // return result1;
            // return result;
         }
         function findDataPosition(data, hdata) {
